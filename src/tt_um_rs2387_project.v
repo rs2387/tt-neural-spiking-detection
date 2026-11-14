@@ -24,21 +24,25 @@ module tt_um_rs2387_project (
     // one-bit spike signal
     wire spike;
 
+    // combines two 8-bit input buses into one 16-bit sample
+    wire signed [15:0] sample = {uio_in, ui_in};
+
     // create an instance of the neural spike detector module
     spike_detector detector (
-        .sample(ui_in),
+        .sample(sample),
         .spike(spike)
     );
 
     // bit 0 = spike event, bits 7:1 = unused, sets all to 0 
     assign uo_out = {7'b0000000, spike};
 
-    // unused bidirectional pins, sets all to 0
+    
+    // makes bidirectional pins inputs
+    assign uio_oe = 8'b00000000;
     assign uio_out = 8'b00000000;
-    assign uio_oe  = 8'b00000000;
 
     // prevents warnings for unused inputs
-    wire _unused = &{uio_in, ena, clk, rst_n, 1'b0};
+    wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule
 

@@ -5,12 +5,15 @@
 // makes a module to detect spikes in neural signal input
 
 module spike_detector (
-    input  wire [7:0] sample, // input sequence of 8 bit unsigned numbers 0-255 
+
+    input  wire signed [15:0] sample, // input sequence of 16 bit signed numbers 
+
     output wire spike         // output of 1 bit event spike 1 or 0
 );
 
-// spike is whether our sample exceeds our thresold |x-128| > T which is 30
-assign spike = (sample < 98) || (sample > 158);
+// spike is whether our sample exceeds our thresold |x-2000| > T which is 400
+assign spike = (sample < 16'sd1600) ||
+               (sample > 16'sd2400);
 
 endmodule
 
