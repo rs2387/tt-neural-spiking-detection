@@ -1,11 +1,11 @@
 ## How it works
 
-Detects neural spikes directly on-chip, reducing the data sent to processors and enabling medical devices and brain-computer interfaces to respond faster.
+Takes input samples if above or below threshold outputs 1 for spike detected
 
 ## How to test
 
-Hold rst_n low for a few clock cycles, then raise it. The pin table in info.yaml says what each input and output does.
+Run the test-bench
 
 ## External hardware
 
-None.
+Will connect to an ADC take in digital continuous streams of data and then connect to a bigger processor/ feedback loop.

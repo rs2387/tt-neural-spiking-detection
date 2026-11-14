@@ -28,7 +28,7 @@ module tb ();
 `endif
 
   // Replace tt_um_example with your module name:
-  tt_um_rs2387_neural_spiking_detection user_project (
+  tt_um_rs2387_project user_project (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
