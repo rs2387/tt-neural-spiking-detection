@@ -32,7 +32,7 @@ In closed-loop neurotechnology, flagging an electrical spike with near-zero dela
 
 ```
   uio_in[6:0], ui_in[7:0] ──> sample[14:0] ──┬──────────────────────────────────┐
-  uio_in[7] ────────────────> sample_valid    │                                ▼
+  uio_in[7] ────────────────> sample_valid   │                                  ▼
                                              ├──> [ exponential_moving_average ]
                                              │                  │
                                              │               ema[14:0], ema_valid
@@ -222,7 +222,7 @@ Both spike-detection algorithms were evaluated across **$20{,}000$ data points**
 
 Using a single exponential moving average baseline filter with a fixed threshold of $150$, the detector flags **$21$ spike events** across the $20{,}000$-sample recording:
 
-![Simple EMA with 150 Threshold — 20,000 Data Points](docs/one_ema_150thres_20000point_2.png)
+![Simple EMA with 150 Threshold — 20,000 Data Points](docs/one_ema_150thres_20000point.png)
 
 ### 2. Double EMA Algorithm (Dynamic Threshold)
 
