@@ -3,19 +3,21 @@
 
 
 // makes a module to detect spikes in neural signal input
-
 module spike_detector (
-
-    input  wire signed [15:0] sample, // input sequence of 16 bit signed numbers 
-
-    output wire spike         // output of 1 bit event spike 1 or 0
+    input wire signed [14:0] ema, // input /sequence of 8 bit unsigned numbers 0-255
+    input wire signed [14:0] sample,
+    output wire raw_spike         // output of 1 bit event spike 1 or 0
 );
 
-// spike is whether our sample exceeds our thresold |x-2000| > T which is 400
-assign spike = (sample < 16'sd1600) ||
-               (sample > 16'sd2400);
+
+    // same width as abs_diff so this is a clean 15-bit compare
+    localparam [14:0] threshold = 15'd150;
+
+    wire [14:0] abs_diff;
+    assign abs_diff = (sample > ema) ? (sample - ema) : (ema - sample);
+    assign raw_spike = (abs_diff > threshold);
 
 endmodule
 
-// revert back to default 
+// revert back to default
 `default_nettype wire
